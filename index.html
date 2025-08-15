@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risha Jayaraj - Creative Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coral: '#FF6B6B',
+                        peach: '#FFB4A2',
+                        rose: '#FF8A95',
+                        lavender: '#E6E6FA',
+                        mint: '#4ECDC4',
+                        sky: '#87CEEB',
+                        purple: '#9B59B6',
+                        orange: '#FF8C42'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'gradient': 'gradient 8s ease infinite',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(5deg); }
+            66% { transform: translateY(-10px) rotate(-5deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #FF6B6B, #4ECDC4, #9B59B6, #FF8C42, #87CEEB, #E6E6FA);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .pinterest-card {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+
+        .masonry {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .masonry { column-count: 2; }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry { column-count: 3; }
+        }
+
+        .skill-bubble {
+            transition: all 0.3s ease;
+        }
+
+        .skill-bubble:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full glass-effect z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-3xl font-bold bg-gradient-to-r from-coral to-purple bg-clip-text text-transparent">
+                    ✨ Risha
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-coral transition-colors font-medium">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-purple transition-colors font-medium">About</a>
+                    <a href="#projects" class="text-gray-700 hover:text-mint transition-colors font-medium">Projects</a>
+                    <a href="#skills" class="text-gray-700 hover:text-rose transition-colors font-medium">Skills</a>
+                    <a href="#experience" class="text-gray-700 hover:text-sky transition-colors font-medium">Experience</a>
+                    <a href="#contact" class="text-gray-700 hover:text-coral transition-colors font-medium">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-coral text-2xl hover:scale-110 transition-transform">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-coral/30">
+                <div class="flex flex-col space-y-4 pt-4">
+                    <a href="#home" class="text-gray-700 hover:text-coral transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-purple transition-colors">About</a>
+                    <a href="#projects" class="text-gray-700 hover:text-mint transition-colors">Projects</a>
+                    <a href="#skills" class="text-gray-700 hover:text-rose transition-colors">Skills</a>
+                    <a href="#experience" class="text-gray-700 hover:text-sky transition-colors">Experience</a>
+                    <a href="#contact" class="text-gray-700 hover:text-coral transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left Content -->
+            <div class="space-y-8 animate-slide-up">
+                <div class="space-y-4">
+                    <div class="inline-block">
+                        <span class="bg-gradient-to-r from-coral to-rose text-white px-6 py-2 rounded-full text-sm font-medium animate-bounce-slow">
+                            Hello, I'm
+                        </span>
+                    </div>
+                    <h1 class="text-6xl md:text-7xl font-bold text-white">
+                        Risha
+                        <br>
+                        Jayaraj
+                    </h1>
+                    <p class="text-3xl md:text-4xl font-semibold text-white/90">
+                        Full Stack Developer
+                    </p>
+                </div>
+                <p class="text-xl text-white/80 leading-relaxed max-w-lg">
+                    Creating magical digital experiences with code, creativity, and cutting-edge technology
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#contact" class="bg-gradient-to-r from-coral to-rose hover:from-rose hover:to-coral text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                        Let's Connect
+                    </a>
+                    <a href="#projects" class="glass-effect border-2 border-white text-white hover:bg-white hover:text-gray-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105">
+                        View My Work
+                    </a>
+                </div>
+                <div class="flex space-x-6 pt-4">
+                    <a href="https://github.com/Risha-Jayaraj" target="_blank" class="w-14 h-14 bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="mailto:rishajayarajks@gmail.com" class="w-14 h-14 bg-gradient-to-r from-coral to-rose text-white rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                    <a href="tel:9363519495" class="w-14 h-14 bg-gradient-to-r from-mint to-sky text-white rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-phone text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right Image -->
+            <div class="flex justify-center animate-fade-in">
+                <div class="relative">
+                    <div class="w-96 h-96 blob bg-gradient-to-br from-coral via-purple to-sky opacity-20"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-80 h-80 rounded-full bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                            <!-- Empty space for your photo -->
+                        </div>
+                    </div>
+                    <!-- Floating elements -->
+                    <div class="absolute -top-6 -right-6 w-12 h-12 bg-gradient-to-r from-peach to-orange rounded-full animate-bounce-slow"></div>
+                    <div class="absolute -bottom-6 -left-6 w-10 h-10 bg-gradient-to-r from-lavender to-mint rounded-full animate-pulse-slow" style="animation-delay: 1s;"></div>
+                    <div class="absolute top-1/2 -right-8 w-8 h-8 bg-gradient-to-r from-rose to-coral rounded-full animate-bounce-slow" style="animation-delay: 2s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative bg-transparent">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-purple via-coral to-sky bg-clip-text text-transparent mb-6">
+                    About Me ✨
+                </h2>
+                <div class="w-32 h-2 bg-gradient-to-r from-coral to-purple mx-auto rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-16 items-start">
+                <div class="space-y-8 animate-slide-up">
+                    <div class="glass-effect rounded-3xl p-8">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            🌟 I'm a passionate Computer Science student who believes in turning ideas into beautiful, functional realities. My journey is fueled by curiosity, creativity, and an endless love for problem-solving!
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            💡 From crafting elegant user interfaces to building robust backend systems, I enjoy every aspect of the development process. I've had amazing experiences working with industry leaders like TATA IQ and Corvanta Analytics.
+                        </p>
+                    </div>
+                </div>
+                <div class="animate-scale-in">
+                    <div class="glass-effect rounded-3xl p-8 mb-8">
+                        <h3 class="text-3xl font-bold bg-gradient-to-r from-coral to-purple bg-clip-text text-transparent mb-8">
+                            What I Love 💖
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-4 group">
+                                <div class="w-12 h-12 bg-gradient-to-r from-coral to-rose rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-xl">🎨</span>
+                                </div>
+                                <span class="text-gray-700 font-medium">Creating Beautiful User Experiences</span>
+                            </div>
+                            <div class="flex items-center space-x-4 group">
+                                <div class="w-12 h-12 bg-gradient-to-r from-mint to-sky rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-xl">🤖</span>
+                                </div>
+                                <span class="text-gray-700 font-medium">Exploring AI & Machine Learning</span>
+                            </div>
+                            <div class="flex items-center space-x-4 group">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple to-lavender rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-xl">🧩</span>
+                                </div>
+                                <span class="text-gray-700 font-medium">Solving Complex Problems</span>
+                            </div>
+                            <div class="flex items-center space-x-4 group">
+                                <div class="w-12 h-12 bg-gradient-to-r from-peach to-orange rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-xl">📚</span>
+                                </div>
+                                <span class="text-gray-700 font-medium">Continuous Learning & Growth</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass-effect rounded-2xl p-6 text-center card-hover">
+                            <div class="text-3xl mb-3">📍</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Location</h4>
+                            <p class="text-gray-600">Chennai, India</p>
+                        </div>
+                        <div class="glass-effect rounded-2xl p-6 text-center card-hover">
+                            <div class="text-3xl mb-3">🎓</div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Education</h4>
+                            <p class="text-gray-600">B.Tech CSE, SRM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-sky via-mint to-lavender bg-clip-text text-transparent mb-6">
+                    Featured Projects 🚀
+                </h2>
+                <div class="w-32 h-2 bg-gradient-to-r from-sky to-mint mx-auto rounded-full"></div>
+            </div>
+            <div class="masonry">
+                <!-- LexiGen AI -->
+                <div class="pinterest-card">
+                    <div class="glass-effect rounded-3xl overflow-hidden card-hover">
+                        <div class="h-48 bg-gradient-to-br from-coral/20 to-purple/20 flex items-center justify-center relative">
+                            <div class="text-6xl animate-bounce-slow">⚖️</div>
+                            <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1">
+                                <span class="text-sm font-medium text-coral">AI Powered</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-2xl font-bold bg-gradient-to-r from-coral to-purple bg-clip-text text-transparent">
+                                    LexiGen AI
+                                </h3>
+                                <a href="https://lexigenai.vercel.app/" target="_blank" class="w-10 h-10 bg-gradient-to-r from-coral to-rose rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </div>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                ✨ An AI-powered legal document assistant that streamlines legal document creation and analysis using cutting-edge generative AI technologies.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="skill-bubble bg-gradient-to-r from-coral/20 to-coral/10 text-coral px-4 py-2 rounded-full text-sm font-medium">🤖 Generative AI</span>
+                                <span class="skill-bubble bg-gradient-to-r from-sky/20 to-sky/10 text-sky px-4 py-2 rounded-full text-sm font-medium">⚛️ React</span>
+                                <span class="skill-bubble bg-gradient-to-r from-mint/20 to-mint/10 text-mint px-4 py-2 rounded-full text-sm font-medium">🟢 Node.js</span>
+                            </div>
+                            <a href="https://lexigenai.vercel.app/" target="_blank" class="inline-flex items-center bg-gradient-to-r from-coral to-rose text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition-transform">
+                                View Live Demo <i class="fas fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Irrigation System -->
+                <div class="pinterest-card">
+                    <div class="glass-effect rounded-3xl overflow-hidden card-hover">
+                        <div class="h-56 bg-gradient-to-br from-mint/20 to-sky/20 flex items-center justify-center relative">
+                            <div class="text-6xl animate-float">🌱</div>
+                            <div class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full px-3 py-1">
+                                <span class="text-sm font-medium text-mint">IoT + ML</span>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold bg-gradient-to-r from-mint to-sky bg-clip-text text-transparent mb-4">
+                                Smart ML-IoT Irrigation System
+                            </h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                🌿 A comprehensive IoT and Machine Learning solution for precision agriculture, optimizing water usage through intelligent monitoring and predictive analytics.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="skill-bubble bg-gradient-to-r from-purple/20 to-purple/10 text-purple px-4 py-2 rounded-full text-sm font-medium">🧠 Machine Learning</span>
+                                <span class="skill-bubble bg-gradient-to-r from-orange/20 to-orange/10 text-orange px-4 py-2 rounded-full text-sm font-medium">📡 IoT</span>
+                                <span class="skill-bubble bg-gradient-to-r from-mint/20 to-mint/10 text-mint px-4 py-2 rounded-full text-sm font-medium">🍃 MongoDB</span>
+                                <span class="skill-bubble bg-gradient-to-r from-sky/20 to-sky/10 text-sky px-4 py-2 rounded-full text-sm font-medium">🐍 Django</span>
+                            </div>
+                            <div class="bg-gradient-to-r from-mint/10 to-sky/10 rounded-2xl p-4">
+                                <div class="text-gray-600 font-medium flex items-center">
+                                    <i class="fas fa-code mr-2 text-mint"></i>
+                                    Project Details Available ✨
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-orange via-rose to-purple bg-clip-text text-transparent mb-6">
+                    Technical Skills 💪
+                </h2>
+                <div class="w-32 h-2 bg-gradient-to-r from-orange to-purple mx-auto rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Programming -->
+                <div class="glass-effect rounded-3xl p-8 text-center card-hover animate-scale-in">
+                    <div class="w-20 h-20 bg-gradient-to-r from-coral to-rose rounded-full flex items-center justify-center mx-auto mb-6 text-3xl animate-bounce-slow">
+                        💻
+                    </div>
+                    <h3 class="text-2xl font-bold bg-gradient-to-r from-coral to-rose bg-clip-text text-transparent mb-6">
+                        Programming Languages
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="skill-bubble bg-gradient-to-r from-coral/10 to-rose/10 text-gray-700 py-3 px-6 rounded-full font-medium">C / C++</div>
+                        <div class="skill-bubble bg-gradient-to-r from-coral/10 to-rose/10 text-gray-700 py-3 px-6 rounded-full font-medium">Python 🐍</div>
+                        <div class="skill-bubble bg-gradient-to-r from-coral/10 to-rose/10 text-gray-700 py-3 px-6 rounded-full font-medium">JavaScript ⚡</div>
+                    </div>
+                </div>
+
+                <!-- Full Stack -->
+                <div class="glass-effect rounded-3xl p-8 text-center card-hover animate-scale-in" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-mint to-sky rounded-full flex items-center justify-center mx-auto mb-6 text-3xl animate-float">
+                        🌐
+                    </div>
+                    <h3 class="text-2xl font-bold bg-gradient-to-r from-mint to-sky bg-clip-text text-transparent mb-6">
+                        Full Stack Development
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="skill-bubble bg-gradient-to-r from-mint/10 to-sky/10 text-gray-700 py-3 px-6 rounded-full font-medium">HTML / CSS 🎨</div>
+                        <div class="skill-bubble bg-gradient-to-r from-mint/10 to-sky/10 text-gray-700 py-3 px-6 rounded-full font-medium">React / Node.js ⚛️</div>
+                        <div class="skill-bubble bg-gradient-to-r from-mint/10 to-sky/10 text-gray-700 py-3 px-6 rounded-full font-medium">Database Management 🗄️</div>
+                    </div>
+                </div>
+
+                <!-- AI/ML -->
+                <div class="glass-effect rounded-3xl p-8 text-center card-hover animate-scale-in" style="animation-delay: 0.4s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple to-lavender rounded-full flex items-center justify-center mx-auto mb-6 text-3xl animate-pulse-slow">
+                        🤖
+                    </div>
+                    <h3 class="text-2xl font-bold bg-gradient-to-r from-purple to-lavender bg-clip-text text-transparent mb-6">
+                        AI & Machine Learning
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="skill-bubble bg-gradient-to-r from-purple/10 to-lavender/10 text-gray-700 py-3 px-6 rounded-full font-medium">PyTorch 🔥</div>
+                        <div class="skill-bubble bg-gradient-to-r from-purple/10 to-lavender/10 text-gray-700 py-3 px-6 rounded-full font-medium">Regression Analysis 📊</div>
+                        <div class="skill-bubble bg-gradient-to-r from-purple/10 to-lavender/10 text-gray-700 py-3 px-6 rounded-full font-medium">RAG & Transformers 🤖</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-transparent">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold bg-gradient-to-r from-sky via-purple to-coral bg-clip-text text-transparent mb-6">
+                    Professional Journey 🌟
+                </h2>
+                <div class="w-32 h-2 bg-gradient-to-r from-sky to-coral mx-auto rounded-full"></div>
+            </div>
+            <div class="space-y-8">
+                <!-- TATA IQ -->
+                <div class="glass-effect rounded-3xl p-8 card-hover animate-slide-up">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-3xl font-bold bg-gradient-to-r from-coral to-purple bg-clip-text text-transparent">
+                                GenAI-Powered Data Analytics Intern
+                            </h3>
+                            <p class="text-xl font-semibold text-sky mt-2">🏢 TATA IQ</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-coral/20 to-purple/20 text-purple font-bold px-6 py-3 rounded-full">
+                            2024 ✨
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-coral to-rose rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-sm">📊</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Performed comprehensive EDA on customer data to identify critical credit risk factors</p>
+                            </div>
+                            <div class="flex items-start space-x-4 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-mint to-sky rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-sm">🤖</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Built and tested advanced Logistic Regression model for accurate delinquency prediction</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-purple to-lavender rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-sm">🚀</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Proposed innovative AI-driven collections system using Agentic AI and SHAP interpretability</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corvanta Analytics -->
+                <div class="glass-effect rounded-3xl p-8 card-hover animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h3 class="text-3xl font-bold bg-gradient-to-r from-mint to-sky bg-clip-text text-transparent">
+                                Backend Development Intern
+                            </h3>
+                            <p class="text-xl font-semibold text-coral mt-2">🏢 Corvanta Analytics</p>
+                        </div>
+                        <div class="bg-gradient-to-r from-mint/20 to-sky/20 text-sky font-bold px-6 py-3 rounded-full">
+                            2024 ⚡
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-mint to-sky rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-sm">⚙️</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Developed and rigorously tested CRUD APIs using Flask and PostgreSQL</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 group">
+                                <div class="w-8 h-8 bg-gradient-to-r from-orange to-peach rounded-full flex items-center justify-center mt-1 group-hover:scale-110 transition-transform">
+                                    <span class="text-white text-sm">🔧</span>
+                                </div>
+                                <p class="text-gray-700 leading-relaxed">Utilized Postman for comprehensive API validation and performance optimization</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-white mb-6">
+                    Let's Create Magic Together ✨
+                </h2>
+                <div class="w-32 h-2 bg-white/50 mx-auto rounded-full mb-6"></div>
+                <p class="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
+                    Ready to bring your ideas to life? I'm always excited about new opportunities and creative collaborations! 🚀
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="space-y-8 animate-slide-up">
+                    <div class="glass-effect rounded-2xl p-6 flex items-center space-x-6 card-hover">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl">
+                            📧
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-xl mb-2">Email Me</h3>
+                            <a href="mailto:rishajayarajks@gmail.com" class="text-white/80 hover:text-white transition-colors text-lg">rishajayarajks@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl p-6 flex items-center space-x-6 card-hover">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl">
+                            📱
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-xl mb-2">Call Me</h3>
+                            <a href="tel:9363519495" class="text-white/80 hover:text-white transition-colors text-lg">+91 9363519495</a>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl p-6 flex items-center space-x-6 card-hover">
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl">
+                            📍
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-xl mb-2">Location</h3>
+                            <p class="text-white/80 text-lg">Chennai, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="glass-effect rounded-3xl p-8 animate-scale-in">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-white font-medium mb-3">Your Name ✨</label>
+                                <input type="text" required class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-white font-medium mb-3">Email Address 📧</label>
+                                <input type="email" required class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-3">Subject 🎯</label>
+                            <input type="text" required class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all" placeholder="Let's work together!">
+                        </div>
+                        <div>
+                            <label class="block text-white font-medium mb-3">Message 💬</label>
+                            <textarea rows="5" required class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all resize-none" placeholder="Tell me about your amazing project idea..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-white text-gray-800 font-bold py-4 px-6 rounded-xl hover:bg-white/90 transition-all hover:scale-105 hover:shadow-lg">
+                            Send Message 🚀
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-white/80 mb-6 md:mb-0 text-center md:text-left">
+                    <p class="text-lg">Made with 💖 by Risha Jayaraj</p>
+                    <p class="text-sm text-white/60 mt-2">&copy; 2024 All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://github.com/Risha-Jayaraj" target="_blank" class="w-12 h-12 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full flex items-center justify-center text-white hover:scale-110 transition-all duration-300">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="mailto:rishajayarajks@gmail.com" class="w-12 h-12 bg-gradient-to-r from-coral to-rose rounded-full flex items-center justify-center text-white hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll-based color transitions
+        function updateBackgroundColor() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrollPercentage = scrollPosition / documentHeight;
+
+            // Define color stops for each section
+            const colorStops = [
+                { position: 0, colors: ['#FF6B6B', '#4ECDC4', '#9B59B6'] }, // Home - animated gradient
+                { position: 0.2, colors: ['#f3e8ff', '#fdf2f8'] }, // About - purple to pink
+                { position: 0.4, colors: ['#fdf2f8', '#f0f9ff'] }, // Projects - pink to sky
+                { position: 0.6, colors: ['#f0f9ff', '#f0fdfa'] }, // Skills - sky to mint
+                { position: 0.8, colors: ['#f0fdfa', '#f3e8ff'] }, // Experience - mint to purple
+                { position: 1, colors: ['#FF6B6B', '#4ECDC4', '#9B59B6'] } // Contact - animated gradient
+            ];
+
+            let currentStop = 0;
+            for (let i = 0; i < colorStops.length - 1; i++) {
+                if (scrollPercentage >= colorStops[i].position && scrollPercentage <= colorStops[i + 1].position) {
+                    currentStop = i;
+                    break;
+                }
+            }
+
+            const startStop = colorStops[currentStop];
+            const endStop = colorStops[currentStop + 1];
+            const localProgress = (scrollPercentage - startStop.position) / (endStop.position - startStop.position);
+
+            // Special handling for animated gradient sections (home and contact)
+            if (currentStop === 0 || currentStop === colorStops.length - 2) {
+                // Keep the animated gradient for home and contact
+                return;
+            }
+
+            // Interpolate between solid colors for middle sections
+            const startColor = hexToRgb(startStop.colors[0]);
+            const endColor = hexToRgb(endStop.colors[0]);
+            
+            const r = Math.round(startColor.r + (endColor.r - startColor.r) * localProgress);
+            const g = Math.round(startColor.g + (endColor.g - startColor.g) * localProgress);
+            const b = Math.round(startColor.b + (endColor.b - startColor.b) * localProgress);
+
+            document.body.style.background = `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function hexToRgb(hex) {
+            // Handle Tailwind color names
+            const colorMap = {
+                '#f3e8ff': { r: 243, g: 232, b: 255 }, // purple-50
+                '#fdf2f8': { r: 253, g: 242, b: 248 }, // pink-50
+                '#f0f9ff': { r: 240, g: 249, b: 255 }, // sky-50
+                '#f0fdfa': { r: 240, g: 253, b: 250 }  // mint-50
+            };
+            
+            if (colorMap[hex]) return colorMap[hex];
+            
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : { r: 255, g: 255, b: 255 };
+        }
+
+        // Section-specific background management
+        function updateSectionBackgrounds() {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    // Reset body background for gradient sections
+                    if (section.id === 'home' || section.id === 'contact') {
+                        document.body.style.background = '';
+                        document.body.className = 'bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen text-gray-800';
+                    }
+                }
+            });
+        }
+
+        // Throttled scroll handler for better performance
+        let ticking = false;
+        function handleScroll() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateBackgroundColor();
+                    updateSectionBackgrounds();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            const name = contactForm.querySelector('input[type="text"]').value;
+            const email = contactForm.querySelector('input[type="email"]').value;
+            const subject = contactForm.querySelectorAll('input[type="text"]')[1].value;
+            const message = contactForm.querySelector('textarea').value;
+            
+            const mailtoLink = `mailto:rishajayarajks@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            window.location.href = mailtoLink;
+            
+            // Show success animation
+            const button = contactForm.querySelector('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Message Sent! 🎉';
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                contactForm.reset();
+            }, 3000);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96f9817e56b89aa2',t:'MTc1NTI2OTQ0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
